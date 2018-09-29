@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <input type="" id="lat1" placeholder="">
+    <input type="" id="lon1" placeholder="">
+    <input type="" id="lat2" placeholder="">
+    <input type="" id="lon2" placeholder="">
+
+    <button id="save">Save</button>
+
+    <script>
+        let $save = jQuery("#save")
+            .css({
+                background:'red',
+                width:"200px",
+                height:40,
+                textAlign:'center'
+            });
+        $save.click(function () {
+            let $lat1 = $('#lat1');
+            let $lon1 = $('#lon1');
+            let $lat2 = $('#lat2');
+            let $lon2 = $('#lon2');
+
+
+            let lat1 = $lat1.val();
+            let lon1 = $lon1.val();
+            let lat2 = $lat2.val();
+            let lon2= $lon2.val();
+
+            let point = JSON.stringify({lat1,lon1,lat2,lon2});
+
+            $.ajax({
+                url: "http://localhost:8100/load",
+                type: 'GET',
+                data: point,
+                contentType: 'application/json',
+                error:function (err) {
+                    console.log(err);
+                },
+                success:function (result) {
+                    console.log(result);
+                }
+            })
+        })
+    </script>
+</body>
+</html>
